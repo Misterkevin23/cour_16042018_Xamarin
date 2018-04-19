@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+    <title>Exercice 1: Remplir une ListView en utilisant un ArrayAdapter</title>
+    <link rel="stylesheet" type="text/css" href="./res/styles/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./res/styles/prettify.css" />
+    <link rel="stylesheet" type="text/css" href="./res/styles/styles.css">
+</head>
+
+<body>
+    <!-- Use the same title as the StartHere -->
+    <header>ListViews et Adapters en Android</header>
+
+   	<section id="main">
+
+		<h1 id="page-title"></h1>
+
+		<h2>Durée</h2>
+		<p>15 minutes</p>
+
+		<!-- - - - - - - - - Goals - - - - - - - - -->
+
+		<h2 id="goals">Objectifs</h2>
+		<p>
+			Le premier objectif de cet atelier est d'afficher une collection de données dans une <code>ListView</code>. Vous allez également
+			travailler avec la classe <code>ArrayAdapter</code> qui est pratique pour afficher des données de type string data et pour le prototypage 
+			quand vous créez une liste rapidement. Utilisez les étapes de heut niveau pour compléter l'exercice.
+		</p>
+		
+		<p>
+			Vous allez créer une application qui affiche une liste des formateurs de l'école. Chaque formateur possède un nom, une photo, une spécialité et
+            une biographie. Une classe <code>Instructor</code> et le code pour générer une collection de formateurs est fournie.
+		</p>
+		
+        <p>
+            Comme vous allez utiliser un <code>ArrayAdapter</code>, vous serez restreint à afficher une string unique pour chaque formateur
+            (les parties suivantes de cet atelier utiliseront un adaptateur personnalisé pour supprimer cette restriction). 
+            Le code de démarrage concatène le nom et les spécialités du formateur pour générer la chaine de caratère à afficher.
+        </p>
+
+<p>
+<a href="#" onclick="toggleBlock(this, 'whatis_arrayadapter', 'What is an ArrayAdapter?', 'Hide'); return false;" class="uiitem">What is an ArrayAdapter?</a>
+<div class="wsblock" id="whatis_arrayadapter" style="display:none;">
+<!-- Each item is in a div "wsitem" -->
+	<div class="wsitem">
+	<b>What is an ArrayAdapter?</b>
+	<p>
+		The library class <code>ArrayAdapter</code> is a pre-built adapter that is easy to use but not very powerful. It calls <code>ToString</code> on
+		 your data objects and loads the resulting string into a <code>TextView</code> to be displayed in a list row.
+	</p>
+	<p>
+		You can ask <code>ArrayAdapter</code> to populate a simple layout containing a single <code>TextView</code> or a more complex layout if you
+		give it the id of a <code>TextView</code> inside the layout file. This "one string only" simplicity means you cannot use it to build a custom
+		row containing heterogenous views; for example, your row cannot display custom images set from code nor multiple pieces of text set from code.
+		Despite these limitations, it can be useful in two cases: your data is already a collection of strings or you are building a quick prototype
+		 and are not concerned with fancy, formatted output.
+	</p>
+	<p>
+		Below is some pseudocode to create an <code>ArrayAdapter</code> from a layout file containing only one <code>TextView</code>. 
+		The first constructor parameter needs to be a <code>Context</code>; typically, this code would be inside an Activity so you
+		would pass the Activity itself (i.e. <code>this</code>) as the context. The second parameter is the id of the layout file you
+		want to use. The third parameter is your collection of data in either an array or an <code>IList</code>.
+	</p>
+<pre class="prettyprint codeblock">
+var adapter = new ArrayAdapter&lt;MyDataClassType&gt;(
+	this,          // Context
+	LayoutFileId,  // Resource id of Layout
+	IEnumerable&lt;MyDataClassType&gt;); // Collection of T
+</pre>
+	<p>
+		For more guidance, see <a href="http://developer.xamarin.com/recipes/android/data/adapters/use_an_arrayadapter/">Use an ArrayAdapter</a>. 
+		For a discussion of performance issues, see <a href="http://androidapi.xamarin.com/?link=T%3aAndroid.Widget.ArrayAdapter">Android.Widget.ArrayAdapter Class</a>
+		and <a href="http://developer.xamarin.com/guides/android/advanced_topics/api_design/">API Design (Binding Design - Collections section)</a>
+	</p>
+	</div>
+</div>
+</p>
+
+		<p>
+			L'interface utilisateur coprendra un layout unique avec une <code>ListView</code> comme seul élément enfant.
+			Votre code-behind créera un <code>ArrayAdapter</code> en utilisant les données exemple et les chargera dans la propriété la propriété
+			 <code>Adapter</code> du <code>ListView</code>. Une fois terminé le projet devra ressembler à cela:
+		</p>
+		<img src="./res/images/Part1.Completed.png" alt="- - - - - - - - - MISSING IMAGE - - - - - - - - - -" />
+
+		<!-- - - - - - - - - Supplied resources - - - - - - - - -->
+
+		<h2>Assets nécessaires</h2>
+		<p>
+			Afin de réaliser au mieux ce projet, vous devrez inclure les fichiers suivants
+
+			<ul class="indent-medium" type="square">
+				<li>
+					<b>Instructor.cs</b> contient uneclasse représentant un formateur.
+				</li>
+
+				<li>
+					<b>InstructorData.cs</b> crée et remplit une liste d'objets Instructor. 
+				</li>
+
+				
+			</ul>
+		</p>
+
+		
+
+		<!-- - - - - - - - - Steps - - - - - - - - -->
+
+		<h1 id="steps">Etapes</h1>
+
+		<p>
+			Suivez les étapes ci-dessous pour réaliser l'exercicesBelow are the step-by-step instructions to implement the exercise.
+		</p>
+
+		<h2>Crééez le projet</h2>
+		<ol>
+
+			<li>Créez un nouveau projet <b>Android Application</b>. Le nommer <em>AstonEcole</em>.</li>
+		</ol>
+
+		<h2>Supprimez le code non néceessaire au projet</h2>
+
+		<ol>
+			<li>
+				ouvrez <b>Resources/layout/Main.axml</b> et supprimez le <code>Button</code> du layout.
+			</li>
+
+			<li>
+				Ouvrez <b>MainActivity.cs</b> et supprimez les lignes associés aux vues du fichier <b>Main.axml</b> :
+
+			</li>
+		</ol>
+
+		<h2>Ajoutez le code</h2>
+		<ol>
+			<li>
+				Ajoutez les fichiers <b>Instructor.cs</b> et <b>InstructorData.cs</b> 
+			</li>
+
+            <li>
+                Pour le fichier <b>InstructorData.cs</b>, utilisez un constructeur static pour créer la liste d'objets de type
+                <code>Instructor</code>. Crééez également une propriété statique nommée <code>Instructors</code> qui retourne une liste d'<code>Instructor</code>.
+                Crééez une méthode <code>AddInstructors</code> qui permet d'instancier des objets de type <code>Instructor</code>.
+            </li>
+		</ol>
+
+		<h2>Affichez la liste des formateurs</h2>
+		<ol>
+			<li>
+				Ouvrez <b>Resources/layout/Main.axml</b>.
+			</li>
+
+			<li>
+				Ajoutez une <code>ListView</code> au <code>LinearLayout</code>.
+				
+			</li>
+
+			<li>
+				Ouvrez <b>MainActivity.cs</b>.
+			</li>
+
+			<li>
+				Utilisez <code>FindViewById</code> pour obtenir une référence à la <code>ListView</code>.
+			</li>
+
+			<li>
+				Créez un <code>ArrayAdapter&lt;Instructor&gt;</code>. Vous devez passez 3 paramètres au constructeur:
+				<ul class="indent-none" type="square">
+					<li>
+						Un contexte - cad votre instance d'Activité.
+					</li>
+					
+					<li>
+						L'id du fichier layout utilisé pour la ligne. Utilisez
+						<code>Android.Resource.Layout.SimpleListItem1</code>.
+					</li>
+
+					<li>
+						La collection de formateurs.
+					</li>
+				</ul>
+			</li>
+
+			<li>
+				Chargez le <code>ArrayAdapter</code> dans la propriété <code>Adapter</code> de la <code>ListView</code>.
+			</li>
+
+			<li>
+				Exécutez votre application et vérifiez que la liste des formateurs s'affiche bien.
+			</li>
+		</ol>
+
+		<div class="hintblock">
+			<b>Tip:</b> L'activité que vous avez codée possède une UI contenant uniquement une <code>ListView</code>.
+			Le pattern UI est si commun qu'il y a une classe helper nommée <a href="http://developer.android.com/reference/android/app/ListActivity.html">ListActivity</a>
+			qui construit cette UI pour vous et supprime le besoin de créer un fichier <b>.axml</b>.
+		</div>
+
+		<!-- - - - - - - - - Summary - - - - - - - - -->
+
+		<h1>Résumé</h1>
+		Dans cet atelier, vous avez construit une application Android qui utilise une <code>ListView</code>, un <code>ArrayAdapter</code>, et
+		un layout prédéfini qui affiche une collection. L'<code>ArrayAdapter</code> vous permet de rapidement et avec très peu de code de fournir une UI personnalisée.
+		<br />
+		<br />
+
+		<div class="align-right">
+			<a href="../Start%20Here.html">Retour</a>
+		</div>
+	</section>
+
+    <script src="./res/js/jquery.min.js"></script>
+    <script src="./res/js/prettify.js"></script>
+    <script src="./res/js/script.js"></script>
+
+    <footer></footer>
+</body>
+</html>

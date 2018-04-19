@@ -1,0 +1,272 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+    <title>Exercise 3: Drawer Navigation</title>
+    <link rel="stylesheet" type="text/css" href="./res/styles/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./res/styles/prettify.css" />
+    <link rel="stylesheet" type="text/css" href="./res/styles/styles.css">
+</head>
+
+<body>
+    <!-- Use the same title as the StartHere -->
+    <header>Patterns  de Navigation</headerPatterns>
+
+    <section id="main">
+
+        <h1 id="page-title"></h1>
+
+        <!-- ---------------------------------------------------------------------------------------------------------------- -->
+
+        <h2>Durée</h2>
+        <p>
+            20 minutes
+        </p>
+
+        <!-- ---------------------------------------------------------------------------------------------------------------- -->
+
+        
+        <!-- ---------------------------------------------------------------------------------------------------------------- -->
+
+        <h2>Objectifs</h2>
+
+        <p>
+            Le but de cet exercice est d'ajouter la Drawer Navigation à une application partiellement écrite.
+            Vous allez travailler sur une application <strong>Horloge </strong> qui fournit les trois pages suivantes:
+            <em>heure actuelle </em>, <em>
+                chronomètre </ em>, et <em>à propos de </em>. Votre travail consiste à construire la
+                structure principale de navigation. 
+                Notez le bouton "hamburger" en haut à gauche de l'application; .
+        </p>
+
+        <img src="./res/images/DrawerNavigationCompleted.png" />
+
+        
+
+        <!-- ---------------------------------------------------------------------------------------------------------------- -->
+
+        <h2>Challenge</h2>
+        <p>
+            Vous pouvez utilisez la description suivante pour réaliser l'exercice.
+        </p>
+
+        <ol>
+            <li>
+                Ouvrez la solution <strong>Clock</strong>.
+            </li>
+
+            <li>
+                Ouvrez <strong>MainActivity.cs</strong>. Tout le travail est à réaliser dans ce fichier.
+            </li>
+
+            <li>
+                Utiliser <code>FindViewById</code> pour retrouver le <code>DrawerLayout</code> définit dans le XML et stockez le dans un champ.
+            </li>
+
+            <li>
+                Créez une instance de <code>ActionBarDrawerToggle</code> et stocker là dans un champ.
+            </li>
+
+            <li>
+                Enregistrez l'<code>ActionBarDrawerToggle</code> comme un du <code>DrawerLayout</code>.
+            </li>
+
+            <li>
+                Appelez <code>SetDisplayHomeAsUpEnabled</code> dans l'Activité  ActionBar.
+            </li>
+
+            <li>
+                Substituez <code>OnPostCreate</code> et appelez la méthode <code>SyncState</code> de l'<code>ActionBarDrawerToggle</code>.
+            </li>
+
+            <li>
+                Fermez le navigation drawer quand l'utilisateur clique sur un élément du menu.
+            </li>
+
+            <li>
+                Substituez la méthode <code>OnOptionsItemSelected</code> de l'activité. Appelez la version <code>ActionBarDrawerToggle</code> 
+                de la même méthode. Si elle retourne <code>true</code>, alors vous devez retourner <code>true</code>; sinon appelez 
+                l'implémentation de la classe de base et utioisez sa valeur de retour.
+            </li>
+
+            <li>
+                Exécutez et testez votre application.b
+            </li>
+        </ol>
+        <div hidden="true">
+            <!-- ---------------------------------------------------------------------------------------------------------------- -->
+            <h1>Steps</h1>
+            <p>
+                Below are the step-by-step instructions to implement the exercise.
+            </p>
+            <h2>
+                Examine the starter code
+            </h2>
+            <p>
+                The supplied code implements the entire <strong>Clock</strong> app except for the Drawer Navigation part.
+                Before you begin coding, the steps here will lead you through an examination of a few key parts of the provided code.
+            </p>
+            <ol>
+                <li>
+                    Open the <strong>Clock</strong> solution from the <strong>Lab.Start</strong> folder.
+                </li>
+                <li>
+                    Open <strong>Resources/layout/Main.axml</strong> in source-code view.
+                </li>
+                <li>
+                    Notice the <code>DrawerLayout</code> used as the root layout. It has an <code>id</code> so you can access
+                    it from code-behind.
+                </li>
+                <li>
+                    The first child is a <code>FrameLayout</code>. This will display the app's main content. Each page of
+                    the app is implemented as a Fragment. The code-behind will load a different Fragment into this
+                    <code>FrameLayout</code> whenever the user clicks on an entry in the navigation menu. Notice that
+                    this has an <code>id</code> to enable access from code-behind.
+                </li>
+                <li>
+                    The second child is a <code>ListView</code> that implements the navigation menu. It has an <code>id</code>
+                    to allow code-behind access. Notice the setting for <code>layout_gravity</code>. This is required.
+                    The <code>DrawerLayout</code> searches through its children looking for one that has horizontal gravity defined
+                    and puts that view inside its sliding-drawer menu.
+                </li>
+                <li>
+                    Open <strong>MainActivity.cs</strong>.
+                </li>
+                <li>
+                    Locate and study all the code that deals with the <code>ListView</code>. There is some initialization
+                    in <code>OnCreate</code>. There is more code in the <code>OnMenuItemClick</code> handler that swaps the
+                    Fragment that is shown to the user. None of this code is specific to Drawer Navigation; it is standard
+                    <code>ListView</code> and Fragment code.
+                </li>
+            </ol>
+            <!-- ---------------------------------------------------------------------------------------------------------------- -->
+            <h2>
+                Implement Drawer Navigation
+            </h2>
+            <p>
+                Your task is to create a button to control the navigation drawer. It is not quite as easy as it sounds
+                because the button and drawer interact with each other in a few different ways. There is also one case
+                they don't handle: when the user selects a menu item, you have to close the navigation drawer.
+            </p>
+            <ol>
+                <li>
+                    Open <strong>MainActivity.cs</strong>. All your work will be done in this file.
+                </li>
+                <li>
+                    In <code>OnCreate</code>, use <code>FindViewById</code> to retrieve a reference to the
+                    <code>DrawerLayout</code> defined in the XML and store it in a field.
+                </li>
+                <li>
+                    In <code>OnCreate</code>, create an instance of <code>ActionBarDrawerToggle</code> and store a
+                    reference to it in a field. The accessibility strings you will need to pass to the constructor
+                    have been defined for you with ids of <code>Resource.String.DrawerOpenDescription</code>
+                    and <code>Resource.String.DrawerCloseDescription</code>. The completed code is given below if
+                    you need it, hidden behind a button.
+
+                    <p>
+                        <a href="#" onclick="toggleCode(this,'CreateToggle');return false;" class="uiitem">Show Code</a>
+                        <div class="indent-medium" id="CreateToggle" style="display:none;">
+<pre class="prettyprint">
+drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, Resource.String.DrawerOpenDescription, Resource.String.DrawerCloseDescription);
+</pre>
+                        </div>
+                    </p>
+                </li>
+                <li>
+                    In <code>OnCreate</code>, register the <code>ActionBarDrawerToggle</code> as a listener on the
+                    <code>DrawerLayout</code>. The method you need to call is named <code>SetDrawerListener</code>
+                </li>
+                <li>
+                    In <code>OnCreate</code>, call <code>SetDisplayHomeAsUpEnabled</code> on the Activity's ActionBar.
+                    The completed code is given below if you need it, hidden behind a button.
+
+                    <p>
+                        <a href="#" onclick="toggleCode(this,'UpEnable');return false;" class="uiitem">Show Code</a>
+                        <div class="indent-medium" id="UpEnable" style="display:none;">
+<pre class="prettyprint">
+ActionBar.SetDisplayHomeAsUpEnabled(true);
+</pre>
+                        </div>
+                    </p>
+                </li>
+                <li>
+                    Override the Activity's <code>OnPostCreate</code> method and call the <code>SyncState</code>
+                    method on your <code>ActionBarDrawerToggle</code>.
+                    The completed code is given below if you need it, hidden behind a button.
+
+                    <p>
+                        <a href="#" onclick="toggleCode(this,'PostCreate');return false;" class="uiitem">Show Code</a>
+                        <div class="indent-medium" id="PostCreate" style="display:none;">
+<pre class="prettyprint">
+protected override void OnPostCreate(Bundle savedInstanceState)
+{
+  drawerToggle.SyncState();
+
+  base.OnPostCreate(savedInstanceState);
+}
+</pre>
+                        </div>
+                    </p>
+                </li>
+                <li>
+                    In <code>OnMenuItemClick</code>, add a call to the <code>CloseDrawer</code> method on the
+                    <code>DrawerLayout</code>. You will need to pass the <code>ListView</code> as the parameter.
+                </li>
+                <li>
+                    Override the Activity's <code>OnOptionsItemSelected</code> method. You need to call
+                    the <code>ActionBarDrawerToggle</code>'s version of the same method
+                    (i.e. <code>OnOptionsItemSelected</code>) and pass the <code>IMenuItem</code> parameter
+                    to it. If it returns <code>true</code>, then you should return <code>true</code> as
+                    well. If it returns <code>false</code>, then you should call your <code>base</code>
+                    implementation and return whatever value it returns to you.
+                    The completed method implementation is given below if you need it, hidden behind a button.
+
+                    <p>
+                        <a href="#" onclick="toggleCode(this,'OptionsItem');return false;" class="uiitem">Show Code</a>
+                        <div class="indent-medium" id="OptionsItem" style="display:none;">
+<pre class="prettyprint">
+if (drawerToggle.OnOptionsItemSelected(item))
+  return true;
+
+return base.OnOptionsItemSelected(item);
+</pre>
+                        </div>
+                    </p>
+                </li>
+                <li>
+                    Run the app to test your work. Use the button to open/close the navigation drawer.
+                    Use swipe gestures to open/close the navigation drawer. Select a menu item and
+                    verify the drawer closes.
+                </li>
+            </ol>
+        </div>
+        <!-- ---------------------------------------------------------------------------------------------------------------- -->
+
+        <h1>Summary</h1>
+        <p>
+            In this exercise, you used Drawer Navigation to implement a flyout menu. This pattern can be complex to
+            code since it has several components that all need to interact with each other. However, it can be worth
+            the effort when you have an app with a large number of pages: Drawer Navigation gives you the room for a
+            large menu with links to all your pages while taking up minimal UI real estate when the menu is closed.
+        </p>
+
+        <p>
+            In your opinion, was Drawer Navigation appropriate for this app? Would it have been better to use Tabs?
+            There is no right or wrong answer here, it is just something to think about.
+        </p>
+
+        <!-- ---------------------------------------------------------------------------------------------------------------- -->
+
+        <div class="align-right">
+            <a href="../StartHere.html">Go Back</a>
+        </div>
+
+    </section>
+
+    <script src="./res/js/jquery.min.js"></script>
+    <script src="./res/js/prettify.js"></script>
+    <script src="./res/js/script.js"></script>
+
+    <footer>Copyright (C) 2016 Xamarin</footer>
+</body>
+</html>

@@ -1,0 +1,11 @@
+D:\cour_du_20180416_Xamarin_C#\TipCalculator\TipCalculator.UITests\bin\Debug\TipCalculator.UITests.dll
+D:\cour_du_20180416_Xamarin_C#\TipCalculator\TipCalculator.UITests\bin\Debug\TipCalculator.UITests.pdb
+D:\cour_du_20180416_Xamarin_C#\TipCalculator\TipCalculator.UITests\bin\Debug\nunit.framework.dll
+D:\cour_du_20180416_Xamarin_C#\TipCalculator\TipCalculator.UITests\bin\Debug\Xamarin.UITest.dll
+D:\cour_du_20180416_Xamarin_C#\TipCalculator\TipCalculator.UITests\bin\Debug\nunit.framework.xml
+D:\cour_du_20180416_Xamarin_C#\TipCalculator\TipCalculator.UITests\bin\Debug\Xamarin.UITest.xml
+D:\cour_du_20180416_Xamarin_C#\TipCalculator\TipCalculator.UITests\obj\Debug\TipCalculator.UITests.csprojResolveAssemblyReference.cache
+D:\cour_du_20180416_Xamarin_C#\TipCalculator\TipCalculator.UITests\obj\Debug\TipCalculator.UITests.csproj.CoreCompileInputs.cache
+D:\cour_du_20180416_Xamarin_C#\TipCalculator\TipCalculator.UITests\obj\Debug\TipCalculator.UITests.csproj.CopyComplete
+D:\cour_du_20180416_Xamarin_C#\TipCalculator\TipCalculator.UITests\obj\Debug\TipCalculator.UITests.dll
+D:\cour_du_20180416_Xamarin_C#\TipCalculator\TipCalculator.UITests\obj\Debug\TipCalculator.UITests.pdb

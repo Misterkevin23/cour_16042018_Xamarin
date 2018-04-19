@@ -1,0 +1,16 @@
+Clock.MainActivity, Clock;md524323871e5dcd26cfdccddd281b8b7b1.MainActivity
+Clock.MainActivity, Clock, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md524323871e5dcd26cfdccddd281b8b7b1.MainActivity
+Clock.MainActivity;md524323871e5dcd26cfdccddd281b8b7b1.MainActivity
+clock.MainActivity;md524323871e5dcd26cfdccddd281b8b7b1.MainActivity
+Clock.AboutActivity, Clock;md524323871e5dcd26cfdccddd281b8b7b1.AboutActivity
+Clock.AboutActivity, Clock, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md524323871e5dcd26cfdccddd281b8b7b1.AboutActivity
+Clock.AboutActivity;md524323871e5dcd26cfdccddd281b8b7b1.AboutActivity
+clock.AboutActivity;md524323871e5dcd26cfdccddd281b8b7b1.AboutActivity
+Clock.StopwatchActivity, Clock;md524323871e5dcd26cfdccddd281b8b7b1.StopwatchActivity
+Clock.StopwatchActivity, Clock, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md524323871e5dcd26cfdccddd281b8b7b1.StopwatchActivity
+Clock.StopwatchActivity;md524323871e5dcd26cfdccddd281b8b7b1.StopwatchActivity
+clock.StopwatchActivity;md524323871e5dcd26cfdccddd281b8b7b1.StopwatchActivity
+Clock.TimeActivity, Clock;md524323871e5dcd26cfdccddd281b8b7b1.TimeActivity
+Clock.TimeActivity, Clock, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md524323871e5dcd26cfdccddd281b8b7b1.TimeActivity
+Clock.TimeActivity;md524323871e5dcd26cfdccddd281b8b7b1.TimeActivity
+clock.TimeActivity;md524323871e5dcd26cfdccddd281b8b7b1.TimeActivity

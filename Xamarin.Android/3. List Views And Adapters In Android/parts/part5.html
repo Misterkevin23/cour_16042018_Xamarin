@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+    <title>Exercice 5: Activer le fast scrolling et coder une section indexer</title>
+    <link rel="stylesheet" type="text/css" href="./res/styles/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./res/styles/prettify.css" />
+    <link rel="stylesheet" type="text/css" href="./res/styles/styles.css">
+</head>
+
+<body>
+    <!-- Use the same title as the StartHere -->
+    <header>ListViews et Adapters dans Android</header>
+
+   	<section id="main">
+
+		<h1 id="page-title"></h1>
+
+		<h2>Durée</h2>
+		<p>15 minutes</p>
+
+		<!-- - - - - - - - - Goals - - - - - - - - -->
+
+		<h2 id="goals">Objectifs</h2>
+        <p>
+            L'objectif ici est d'améliorer l'expérience utilisateur lors du défilement dans un <code>ListView </ code> affichant de nombreuses données. 
+            Vous le ferez de deux façons: activer une barre de défilement améliorée à fort taux de mouvement
+                et fournir des en-têtes de section contextuelle pour informer l'utilisateur de leur progression à travers le
+                jeu de données pendant le défilement. L'application achevée est affichée ci-dessous.
+        </p>
+		<img src="./res/images/Part5.Completed.png" alt="- - - - - - - - - MISSING IMAGE - - - - - - - - - -" />
+
+		<p>
+			Ci-dessous, une description des tâches requises pour cet atelier.
+			<ol class="indent-medium">
+				<li>
+					Utilisez <code>ListView.FastScrollEnabled</code> pour activer le fast scrolling.
+				</li>
+<p class="indent-none">
+<a href="#" onclick="toggleBlock(this, 'whatis_fastScrolling', 'What is fast scrolling?', 'Hide'); return false;" class="uiitem">What is fast scrolling?</a>
+<div class="indent-none wsblock" id="whatis_fastScrolling" style="display:none;">
+	<div class="wsitem">
+	<b>What is fast scrolling?</b>
+	<p>
+		<code>ListView</code>'s default scrolling is precise but can take a long time to move through a	large data set. You can turn on <em>fast scrolling</em> to give the user two scrolling modes: the normal one and an additional option of dragging the <em>thumb</em> to move through the rows at a faster pace. The thumb appears automatically when the user begins a normal scrolling operation and	disappears automatically when they are finished. In Xamarin.Android, you control fast scrolling with the <code>FastScrollEnabled</code> property.
+	</p>
+<pre class="prettyprint codeblock">
+myListView.FastScrollEnabled = true;
+</pre>
+	<p>
+		Here is the underlying Android method <a href="http://developer.android.com/reference/android/widget/AbsListView.html#setFastScrollEnabled(boolean)">setFastScrollEnabled (Android)</a>.	
+	</p>
+	</div>
+</div>
+</p>	
+
+				<li>
+					Implémentez l'interface <code>ISectionIndexer</code> sur votre adapter personnalisé pour avoir des en-têtes de section.
+				</li>
+
+<p class="indent-none">
+<a href="#" onclick="toggleBlock(this, 'whatis_indexing', 'How do you implement a Section Indexer?', 'Hide'); return false;" class="uiitem">How do you implement a Section Indexer?</a>
+<div class="indent-none wsblock" id="whatis_indexing" style="display:none;">
+	<div class="wsitem">
+	<b>How do you implement a Section Indexer?</b>
+	<p>
+		Implementing a section indexer requires that you code the three methods from the <code>ISectionIndexer</code>interface. The "Adding a Section Index" discussion on <a href="http://developer.xamarin.com/guides/android/user_interface/working_with_listviews_and_adapters/part_2_-_populating_a_listview_with_data/">this page from the Xamarin documentation</a> describes the implementation in Xamarin.Android.
+	</p>
+	</div>
+</div>
+</p>	
+
+			</ol>
+		</p>
+    <div hidden="true">
+        <h2>Required assets</h2>
+        <p>
+            The provided <strong>Part 05 Resources</strong> folder contains resources that you will need in order to complete the lab, including a completed version of the exercise.
+
+            <ul class="indent-medium" type="square">
+                <li>
+                    The file <strong>SectionIndexerBuilder.cs</strong> contains a class to perform the tedious parts of implementing a section indexer.
+                </li>
+            </ul>
+        </p>
+        <!-- - - - - - - - - Steps - - - - - - - - -->
+        <h1 id="steps">Steps</h1>
+        <p>
+            Below are the step-by-step instructions to implement the exercise.
+        </p>
+        <h2>Enable fast scrolling</h2>
+        <p>
+            This section turns on fast scrolling for the instructor <code>ListView</code>. All the functionality here
+            is built in to the <code>ListView</code> class so this requires only a single line of code.
+        </p>
+        <ol>
+            <li>
+                Open <strong>MainActivity.cs</strong>.
+            </li>
+            <li>
+                In your <code>OnCreate</code> method, set the <code>FastScrollEnabled</code> property of your instructor <code>ListView</code> to <code>true</code>.
+            </li>
+            <li>
+                Run the app to test your work. Begin scrolling the <code>ListView</code> as normal, then switch to using the thumb when it appears.
+
+                <div class="hintblock">
+                    <strong>Note:</strong> <code>ListView</code> might not show the thumb even if you have fast scrolling enabled if your data set is not large
+                    enough to need it. If the thumb does not appear during your testing, please verify that you have at least three times the amount of data
+                    needed to fill the screen. You can edit the <strong>InstructorData</strong> static constructor to call the <code>AddInstructors</code>
+                    method additional times if needed.
+                </div>
+            </li>
+        </ol>
+        <h2>Implement a section indexer</h2>
+        <p>
+            This part adds a <em>section indexer</em> to your custom adapter. The indexer tells the <code>ListView</code>
+            where the "sections" are in your data. You get to decide what a "section" means; for example,
+            our instructors are sorted by name so the sections will be based on the first letter of their name.
+        </p>
+
+        <p>
+            To code a section indexer, your adapter needs to implement the three methods in the <code>ISectionIndexer</code> interface. The code is fairly straightforward but somewhat tedious to implement; therefore, the provided <code>SectionIndexerBuilder</code> class will do most of the work for you.
+        </p>
+        <ol>
+            <li>
+                Add the file <strong>SectionIndexerBuilder.cs</strong> from the <strong>Part 05 Resources</strong> folder to the project. Open the file and look at the class definition. There are three helper methods
+                (shown below) that build the data structures you need to easily implement the three	<code>ISectionIndexer</code> methods.
+
+<pre class="prettyprint codeblock">
+public static class SectionIndexerBuilder
+{
+  // builds an array of unique section headers, data must be sorted by name
+  public static Java.Lang.Object[] BuildSectionHeaders(List&lt;Instructor&gt; data) ...
+
+  // builds a map to answer: position --> section, data must be sorted by name
+  public static Dictionary&lt;int, int&gt; BuildSectionForPositionMap(
+     List&lt;Instructor&gt; instructors) ...
+
+  // builds a map to answer: section --> position, data must be sorted by name
+  public static Dictionary&lt;int, int&gt; BuildPositionForSectionMap(
+     List&lt;Instructor&gt; instructors) ...
+}
+</pre>
+            </li>
+            <li>
+                Open <strong>InstructorAdapter.cs</strong>.
+            </li>
+            <li>
+                Call each of the three <code>SectionIndexerBuilder</code> methods and store the
+                results in fields inside your adapter class.
+            </li>
+        </ol>
+        <p>
+            <a href="#" onclick="toggleCode(this, 'useBuilder'); return false;" class="uiitem">Show Code</a>
+            <div class="indent-medium" id="useBuilder" style="display:none;">
+<pre class="prettyprint">
+Java.Lang.Object[]   sectionHeaders;
+Dictionary&lt;int, int&gt; positionForSectionMap;
+Dictionary&lt;int, int&gt; sectionForPositionMap;
+
+public InstructorAdapter(List<Instructor> instructors)
+{
+  this.instructors = instructors;
+
+  sectionHeaders        = SectionIndexerBuilder.BuildSectionHeaders       (instructors);
+  positionForSectionMap = SectionIndexerBuilder.BuildPositionForSectionMap(instructors);
+  sectionForPositionMap = SectionIndexerBuilder.BuildSectionForPositionMap(instructors);
+}</pre>
+            </div>
+        </p>
+        <ol start="4">
+            <li>
+                Add <code>ISectionIndexer</code> to the list of your adapter's base types.
+            </li>
+            <li>
+                Use the results from the <code>SectionIndexerBuilder</code> to implement the three
+                <code>ISectionIndexer</code> methods.
+            </li>
+            <li>
+                Run the application to test your work. Start scrolling normally and the thumb should appear. Drag the thumb and the section headers should pop up as you pass into each new section.
+            </li>
+        </ol>
+        <p>
+            <a href="#" onclick="toggleCode(this, 'implementIndexer'); return false;" class="uiitem">Show Code</a>
+            <div class="indent-medium" id="implementIndexer" style="display:none;">
+<pre class="prettyprint">
+public Java.Lang.Object[] GetSections()
+{
+  return sectionHeaders;
+}
+
+public int GetPositionForSection(int section)
+{
+  return positionForSectionMap[section];
+}
+
+public int GetSectionForPosition(int position)
+{
+  return sectionForPositionMap[position];
+}
+</pre>
+            </div>
+        </p>
+        <h2>Master-Details (optional after-class exercise)</h2>
+        <p>
+            The application currently displays an alert when the user clicks on an item in the list. A more realistic approach would be to navigate the app to a details view of that instructor. The solution for this part includes code to do this. There is a details Activity (<strong>InstructorDetailsActivity.cs</strong> and <strong>InstructorDetails.axml</strong>) provided in the <strong>Part 05 Resources</strong> folder if you would like to add this behavior to your implementation. You will need to modify your <code>ItemClick</code> handler to create an <code>Intent</code>, target the <code>InstructorDetailsActivity</code>, load the <code>Position</code> into the Intent Extras, and launch the Activity. The provided	<code>InstructorDetailsActivity</code> code will handle retrieving the position and displaying the instructor details.
+        </p>
+    </div>
+		<!-- - - - - - - - - Summary - - - - - - - - -->
+
+		<h1>Résumé</h1>
+        <p>
+            Ici vous avez ajouté le défilement rapide et un indexeur de section à votre liste de formateurs pour rendre l'expérience plus
+            convivial. Quand il y a une petite quantité de données dans la liste, l'utilisateur peut défiler normalement; cependant,
+            lorsque le jeu de données devient grand, l'utilisateur a la possibilité de faire défiler rapidement en utilisant le pouce avec un popup
+            d'en-têtes de section pour les guider.
+        </p>
+
+		<!-- - - - - - - - - Footer - - - - - - - - -->
+
+		<div class="align-right">
+			<a href="../Start%20Here.html">Retour</a>
+		</div>
+
+	</section>
+
+    <script src="./res/js/jquery.min.js"></script>
+    <script src="./res/js/prettify.js"></script>
+    <script src="./res/js/script.js"></script>
+
+    <footer></footer>
+</body>
+</html>

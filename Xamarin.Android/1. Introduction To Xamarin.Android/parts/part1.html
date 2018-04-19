@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+    <title>Exercice 1: Créer un projet Xamarin.Android</title>
+    <link rel="stylesheet" type="text/css" href="./res/styles/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./res/styles/prettify.css" />
+    <link rel="stylesheet" type="text/css" href="./res/styles/styles.css">
+</head>
+
+<body>
+    <!-- Use the same title as the StartHere -->
+    <header>Introduction à Xamarin.Android</header>
+
+   	<section id="main">
+
+		<h1 id="page-title"></h1>
+
+		<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+		<h2>Durée</h2>
+		<p>
+			10 minutes
+		</p>
+
+		<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+		
+
+		<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+		<h2>Objectifs</h2>
+
+		<p>
+			Cet atelier vous permet de créer un proejt Xamarin.Android project. Il n'y a pas de code à écrire; toutefois les instructions vont pointer vers des parties du
+            projet créé.
+		</p>
+
+		<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+		
+
+		<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+		<h1>Etapes</h1>
+		
+
+		<h2>
+			Créer un nouveau projet
+		</h2>
+
+		<ol>
+			<li>
+                Lancer votre IDE (Xamarin Studio or Visual Studio).
+            </li>
+			
+            <li>
+                Créer un nouveu parojet Xamarin.Android.
+				<br/>
+				Dans Xamarin Studio, utilisez <strong>File > New > Solution</strong>, puis choisissez le modèle <strong>Android App</strong> à partir de la catégorie <strong>
+                Android > App</strong>.
+				<br/>
+				Dans Visual Studio, utilisez <strong>File > New > Project</strong>, puis choisissez le modèle <strong>Blank App (Android)</strong> à partir de la catégorie 
+                <strong>Visual C# > Android</strong>.
+			</li>
+            
+            <li>
+                Nommez votre application: <strong>TipCalculator</strong>.
+            </li>
+
+            <li>
+                Choisissez un emplacement pour les fichiers de la solution
+            </li>
+
+            <li>
+                Utilisez les valeurs par défaut pour tous les autres paramétres du projet.
+            </li>
+ 		</ol>
+
+		<h2>
+			Examiner le code source
+		</h2>
+
+		<ol>
+            <li>
+				Exécutez l'application et passez un moment à comprendre son comportement. Le code du modèle possède un bouton unique qui affiche le nombre de fois où il a
+                été cliqué.
+			</li>
+
+			<li>
+				Ouvrez le fichier <strong>Resource > Layout > Main.axml</strong> et afficher sa source. 
+			</li>
+            
+			<li>
+				Examinez le XML qui déclare le <code>Button</code>. En particulier, remarquez que le bouton possède un <code>id</code> qui lui a été assigné.
+			</li>
+            
+			<li>
+				Ouvrez le fichier <strong>MainActivity.cs</strong>.
+			</li>
+            
+			<li>
+				Le modèle génrre une activité pour vous. Les Activités sont les blocks de constructions essentiels des applications Android applications.
+				L'attribut <code>Activity</code> de votre <code>MainActivity</code> a un <code>MainLauncher</code> affecté à <code>true</code> afin de spécifer que cette 
+                activité est le point d'entrée de votre application. (i.e. analogue à la méthode <code>Main</code> d'une application Console C#b).
+			</li>
+
+			<li>
+				Il y a 2 choses à remarquer dans <code>OnCreate</code>. <code>SetContentView</code> prend un "identifier" pour un fichier XML
+				(<code>Resource.Layout.Main</code>) comme argument et instantie l'UI. <code>FindViewById</code> prend un 
+				<code>id</code> et renvoie une référence à la vue qui possède cet id. C'est la façon dont le code accède aux vues de l'UI.
+			</li>
+		</ol>
+
+		<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+	
+		<h1>Résumé</h1>
+		<p>
+			Dans cette section vous avez cré un nouveau projet Xamarin.Android. 
+		</p>
+
+		<div class="align-right">
+			<a href="../Start%20Here.html">retour</a>
+		</div>
+
+	</section>
+
+    <script src="./res/js/jquery.min.js"></script>
+    <script src="./res/js/prettify.js"></script>
+    <script src="./res/js/script.js"></script>
+
+    <footer></footer>
+</body>
+</html>>

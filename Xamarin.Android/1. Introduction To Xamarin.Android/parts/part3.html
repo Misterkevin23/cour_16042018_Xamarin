@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+    <title>Exercice 3: Implémenter un comportement à une Activité et exécuter l'application dans un émulateur</title>
+    <link rel="stylesheet" type="text/css" href="./res/styles/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./res/styles/prettify.css" />
+    <link rel="stylesheet" type="text/css" href="./res/styles/styles.css">
+</head>
+
+<body>
+    <!-- Use the same title as the StartHere -->
+    <header>Introduction à Xamarin.Android</header>
+
+    <section id="main">
+        <h1 id="page-title"></h1>
+        <!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+        <h2>Durée</h2>
+        <p>
+            15 minutes
+        </p>
+        <!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+        <!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+        <h2>Objectifs</h2>
+        <p>
+            L'objectif de cet atelier est d'écrire le code C# pour accéder et manipuler l'UI d'une Activité. Votre code devra lire et écrire pluiseurs contrôle de texte
+            et s'abonner à l'événement click du bouton. pour réaliser ceci, vous devrez assigner des Ids à certaines de vues dans le XML et retrouver ces vues par leur Id
+            dans le code.b
+        </p>
+        <p>
+            Vous continuerez à travailler sur l'application <strong>TipCalculator</strong> app.
+            L'image montre l'UI. Les deux <code>TextView</code>s qui affichent les mots
+            <strong>Tip</strong> et <strong>Total</strong> sont statiques et on n'a pas besoin d'y accéder (par le code).
+            Toutes les autres vues devoient être accesibles par le code: <code>EditText</code> vous permet de lire le montant de la note, le <code>Button</code>
+            doit être associé à son événement  <code>Click</code>, et les deux autres <code>TextView</code>s vous permettent d'afficher les valeurs calculées pour le
+            tip et le total de la facture.
+        </p>
+        <img src="./res/images/Overview.png" />
+        <!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+        <!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+        <h2>Challenge</h2>
+        <p>
+            Utilisez les conseils ci-dessous pour réaliser l'exercice.
+        </p>
+        <ol>
+            <li>Ouvrrez <strong>Resources > Layout > Main.axml</strong>.</li>
+            <li>Ajouter un <code>android:id</code> au <code>EditText</code>, au <code>Button</code>, et le deuxième <code>TextView</code> dans chaque <code>LinearLayout</code>s.</li>
+            <li>Ouvrez <strong>MainActivity.cs</strong>.</li>
+            <li>
+                Ajoutez 4 champs à la classe <code>MainActivity</code>, un pour chacune des 4 vues auxquelles vous avez ajouté des Ids
+                (i.e. un <code>EditText</code>, un <code>Button</code>, et deux <code>TextView</code>s).
+            </li>
+            <li>
+                A l'intérieur de la méthode <code>OnCreate</code>, Utilisez la méthode <code>FindViewById</code> pour retrouver chacune des 4 vues et affectez
+                la valeur de retour au champ correspondant.
+            </li>
+            <li>Abonnez un gestionnaire à l'événement <code>Click</code> du boutont.</li>
+            <li>Dans votre gestionnaire d'événement, retrouvrez le <code>Text</code> du <code>EditText</code>. c'est le montant de la note.</li>
+            <li>Faites en sorte que le tip Compute représente 15% de la note. calculer le montant total de la facture (bill + tip).</li>
+            <li>Chargez le montant du tip dans la propriété <code>Text</code> du <code>TextView</code> pour afficher le tip.</li>
+            <li>Chargez le montant total du paiement dans la propriété <code>Text</code> du <code>TextView</code> pour afficher le total de la facture.</li>
+            <li>exécutez votre application pour tester votre travail.</li>
+        </ol>
+        <!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+        <div hidden="true">
+            <h1>Steps</h1>
+            <p>
+                Below are the step-by-step instructions to implement the exercise.
+            </p>
+            <h2>
+                Add Ids
+            </h2>
+            <p>
+                Here you will assign Ids to some of your views in the XML so they will be accessible from the C# code.
+            </p>
+            <ol>
+                <li>
+                    Open the file <strong>Resource > Layout > Main.axml</strong> in the Source view.
+                </li>
+                <li>
+                    Add an Id to the <code>EditText</code>. The XML is shown below. The "<code>@+id</code>" characters indicate that you
+                    want to create a new Id value. The text after the forward slash is the value for the Id.
+                    <p>
+<pre class="prettyprint codeblock">
+&lt;EditText
+  android:id="@+id/inputBill"
+  android:layout_width ="match_parent"
+  android:layout_height="wrap_content" /&gt;
+</pre>
+                    </p>
+                </li>
+                <li>
+                    Add an Id of <code>calculateButton</code> to the <code>Button</code>.
+                </li>
+                <li>
+                    Add an Id of <code>outputTip</code> to the second <code>TextView</code> inside the first of the two horizontal <code>LinearLayout</code>s.
+                </li>
+                <li>
+                    Add an Id of <code>outputTotal</code> to the second <code>TextView</code> inside the second of the two horizontal <code>LinearLayout</code>s.
+                </li>
+            </ol>
+            <h2>
+                Lookup views from code
+            </h2>
+            <p>
+                Here you will use the Ids you just assigned to lookup those views from the code.
+                You will store the references in fields inside your Activity class.
+            </p>
+            <ol>
+                <li>
+                    Open <strong>MainActivity.cs</strong>.
+                </li>
+                <li>
+                    Add four fields to the <code>MainActivity</code> class, one for each of the four views to which you added Ids (i.e. an <code>EditText</code>,
+                    a <code>Button</code>, and two <code>TextView</code>s).
+                    The code is provided below, hidden behind a button. The provided code uses the same value for the Id and the name of the associated field;
+                    that's just a convention and is not required.
+                    <p>
+                        <a href="#" onclick="toggleBlock(this, 'one', 'Show', 'Hide'); return false;" class="uiitem">Show</a>
+                        <div class="wsblock" id="one" style="display:none;">
+<pre class="prettyprint codeblock">
+EditText inputBill;
+Button   calculateButton;
+TextView outputTip;
+TextView outputTotal;
+</pre>
+                        </div>
+                    </p>
+                </li>
+
+                <li>
+                    Inside <code>OnCreate</code>, use the <code>FindViewById</code> method to lookup each of the four views and assign the returned references to the corresponding fields.
+                    Be sure to place your lookup code after the call to <code>SetContentView</code>; the views you are trying to access are created in <code>SetContentView</code>
+                    so they don't exist until after that call completes.
+                    The code for the first one is provided below, hidden behind a button.
+                    <p>
+                        <a href="#" onclick="toggleBlock(this, 'two', 'Show', 'Hide'); return false;" class="uiitem">Show</a>
+                        <div class="wsblock" id="two" style="display:none;">
+<pre class="prettyprint codeblock">
+public class MainActivity : Activity
+{
+  EditText inputBill;
+  ...
+
+  protected override void OnCreate(Bundle bundle)
+  {
+    base.OnCreate(bundle);
+    SetContentView(Resource.Layout.Main);
+
+    inputBill = FindViewById&lt;EditText&gt;(Resource.Id.inputBill);
+    ...
+  }
+}
+</pre>
+                        </div>
+                    </p>
+                </li>
+
+            </ol>
+            <h2>
+                Access views from code
+            </h2>
+            <p>
+                Here you will use the view references in your code to access the properties and events of the UI views.
+            </p>
+            <ol>
+                <li>
+                    Inside <code>OnCreate</code>, subscribe a handler to the button's <code>Click</code> event. The <code>Click</code>
+                    event uses the standard .NET event pattern so the handler will have an <code>object</code> parameter and an <code>EventArgs</code>
+                    parameter.
+                </li>
+
+                <li>
+                    In your click-handler, retrieve the <code>Text</code> from the <code>EditText</code>. This will be the amount of the bill.
+                    The code is provided below, hidden behind a button.
+                    <p>
+                        <a href="#" onclick="toggleBlock(this, 'three', 'Show', 'Hide'); return false;" class="uiitem">Show</a>
+                        <div class="wsblock" id="three" style="display:none;">
+<pre class="prettyprint codeblock">
+void OnCalculateClick(object sender, EventArgs e)
+{
+  string text = inputBill.Text;
+  ...
+}
+</pre>
+                        </div>
+                    </p>
+                </li>
+
+                <li>
+                    Convert the bill input from a <code>string</code> to a <code>double</code>.
+                </li>
+                <li>
+                    Compute a 15% tip for the bill and store it in a local variable.
+                </li>
+                <li>
+                    Compute the total payment (original bill + tip) and store it in a local variable.
+                </li>
+
+                <li>
+                    Load the tip amount into the <code>Text</code> property of the <code>TextView</code> intended to display the tip.
+                    Your tip amount should be in a variable of type <code>double</code>; you can use its <code>ToString</code> method
+                    to convert it into a <code>string</code> so you can assign it to the <code>Text</code> property of the <code>TextView</code>.
+                </li>
+
+                <li>
+                    Load the total payment into the <code>Text</code> property of the <code>TextView</code> intended to display the total.
+                </li>
+                <li>
+                    Run the app to test your work.
+                </li>
+                <li>
+                    [OPTIONAL] The text labels and outputted values do not have any space between them. You can fix this by including a
+                    layout margin setting to add space around the outside of a view.
+                    Add the attribute setting shown below to the <code>TextView</code> displaying the text "<strong>Tip</strong>".
+                    Similarly, add a right margin of <code>10dp</code> to the <code>TextView</code> displaying the text "<strong>Total</strong>".
+
+                    <div>
+<pre class="prettyprint codeblock">
+android:layout_marginRight="20dp"
+</pre>
+                    </div>
+                </li>
+            </ol>
+        </div>
+        <!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+        <h1>Résumé</h1>
+        <p>
+            Dans cet exercice, vous avez implémenté du code C# pour gérer le comportement d'une Activité. La clef était d'affecter des Ids dans le XML et de les utiliser
+            afin de retrouver les vues dans le code. Cela vous permet d'écrire du code qui manipule l'UI devos Activités.
+        </p>
+        <div class="align-right">
+            <a href="../Start%20Here.html">retour</a>
+        </div>
+    </section>
+
+    <script src="./res/js/jquery.min.js"></script>
+    <script src="./res/js/prettify.js"></script>
+    <script src="./res/js/script.js"></script>
+
+    <footer></footer>
+</body>
+</html>>

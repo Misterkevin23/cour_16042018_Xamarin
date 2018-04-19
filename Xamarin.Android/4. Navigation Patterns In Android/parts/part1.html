@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+    <title>Exercice 1: Stack Navigation</title>
+    <link rel="stylesheet" type="text/css" href="./res/styles/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./res/styles/prettify.css" />
+    <link rel="stylesheet" type="text/css" href="./res/styles/styles.css">
+</head>
+
+<body>
+    <!-- Use the same title as the StartHere -->
+    <header>Patterns de Navigation </header>
+
+   	<section id="main">
+
+		<h1 id="page-title"></h1>
+
+		<!-- ---------------------------------------------------------------------------------------------------------------- -->
+
+		<h2>Durée</h2>
+		<p>
+			10 minutes
+		</p>
+
+		<!-- ---------------------------------------------------------------------------------------------------------------- -->
+
+		
+
+		<!-- ---------------------------------------------------------------------------------------------------------------- -->
+
+		<h2>Objectifs</h2>
+
+        <p>
+            L'objectif principal de ce laboratoire est d'ajouter la Stack Navigation à une application partiellement écrite.
+            Vous allez travailler sur une application <strong>Horloge </strong> qui fournit les trois pages suivantes:
+            <em>heure actuelle </em>, <em>chronomètre </ em>, et <em>à propos de </em>. Votre travail consiste à construire la
+                structure principale de navigation. Remarquez la list-view dans la première capture d'écran. En cliquant
+                sur un des éléments de la liste vous allez naviguer vers la page appropriée.
+        </p>
+
+		<img src="./res/images/StackNavigationCompleted.png" />
+
+		
+		<!-- ---------------------------------------------------------------------------------------------------------------- -->
+		
+		<h2>Challenge</h2>
+
+		<p>
+			Vous pouvez utilisez la description suivante pour réaliser l'exercice.
+		</p>
+		
+		<ol>
+			<li>
+				Ouvrez la solution<strong>Clock</strong>.
+			</li>
+
+			<li>
+				Ouvrez <strong>MainActivity.cs</strong>.
+			</li>
+
+			<li>
+				Complétez l'implémentation de la méthode <code>OnMenuClick</code>. Utilisez un <code>Intent</code> pour naviguer ver l'activité appropriée
+                en fonction de l'élément sur lequel on cliqué.
+			</li>
+
+			<li>
+				Exécutez et testez votre application.
+			</li>
+		</ol>
+        <div hidden="true">
+            <!-- ---------------------------------------------------------------------------------------------------------------- -->
+            <h1>Steps</h1>
+            <p>
+                Below are the step-by-step instructions to implement the exercise.
+            </p>
+            <h2>
+                Examine the starter code
+            </h2>
+            <p>
+                The supplied code implements the entire <strong>Clock</strong> app except for the Stack Navigation part.
+                Before you begin coding, the steps here will lead you through an examination of a few key parts of the provided code.
+            </p>
+            <ol>
+                <li>
+                    Open the <strong>Clock</strong> solution from the <strong>Lab.Start</strong> folder.
+                </li>
+                <li>
+                    Open <strong>Resources/layout/Time.axml</strong> in source-code view.
+                </li>
+                <li>
+                    Notice that the UI to display the current time is just a <code>TextView</code>. The string it displays
+                    is updated every second from the code-behind.
+                </li>
+                <li>
+                    Open <strong>TimeActivity.cs</strong>.
+                </li>
+                <li>
+                    Note that the <code>TimeActivity</code> is an Activity.
+                    The implementation uses a timer to update the UI once per second.
+                </li>
+                <li>
+                    The other Activities (<code>StopwatchActivity</code> and <code>AboutActivity</code>) are similar. If you
+                    have extra time, feel free to examine them; however, there is nothing there that you need to know to
+                    continue with the exercise.
+                </li>
+                <li>
+                    Open <strong>Resources/layout/Main.axml</strong> in source-code view.
+                </li>
+                <li>
+                    Notice the <code>ListView</code>. This is the navigation "menu".
+
+                </li>
+                <li>
+                    Open <strong>MainActivity.cs</strong>.
+                </li>
+                <li>
+                    The <code>OnCreate</code> method initializes the <code>ListView</code> so it has one entry
+                    for each of the three app functions: time, stopwatch, and about. When the user clicks on one
+                    of the list items, you will need to write code to navigate the app to the corresponding activity.
+                </li>
+            </ol>
+            <h2>
+                Implement Stack Navigation
+            </h2>
+            <p>
+                Here you will code Stack Navigation. You will create an Intent and start an Activity
+                when the user clicks on the navigation menu.
+            </p>
+            <ol>
+                <li>
+                    Open <strong>MainActivity.cs</strong> and locate the <code>OnMenuClick</code> method.
+                    All your work will be done inside this method.
+                </li>
+                <li>
+                    The <code>ListView</code> will pass you the index of the clicked item in the
+                    <code>Position</code> property of the EventArgs. You will need to retrieve this
+                    value so you can decide which Activity you will navigate to.
+                </li>
+                <li>
+                    Create an <code>Intent</code> to navigate to the Activity the user selected.
+                    The <code>Intent</code> class has several constructors; you should use the version
+                    that takes two arguments: a <code>Context</code> (your Activity is a <code>Context</code>)
+                    and a <code>Type</code>. Pass a different <code>Type</code> object based on the value of the
+                    <code>Position</code> property in the EventArgs. Below is some generic code that shows how to
+                    create an <code>Intent</code>.
+                    <p>
+                        <div>
+                            <pre class="prettyprint">
+var intent = new Intent(this, typeof(TargetActivity));
+</pre>
+                        </div>
+                    </p>
+                </li>
+                <li>
+                    Call the <code>StartActivity</code> method and pass it the <code>Intent</code>.
+                </li>
+                <li>
+                    Run the app to test your work. Click on one of the items in the list.
+                    Use the Android Back button to return to the Main screen.
+                </li>
+            </ol>
+</div>
+		<!-- ---------------------------------------------------------------------------------------------------------------- -->
+
+		<h1>Résumé</h1>
+
+        <p>
+            Cet exercice vous a demandé d'utiliser les Activités et les Intents pour implémenter la stack navigation.
+            La création d'un Intent et l'appel de <code>StartActivity </code> permet d'effectuer une navigation vers l'avant.
+                La nouvelle activité a été automatiquement ajoutée à la pile arrière Android. Le bouton Android Précédent a 
+            automatiquement renvoyé votre application à l'activité précédente . 
+        </p>
+
+		<!-- ---------------------------------------------------------------------------------------------------------------- -->
+
+		<div class="align-right">
+			<a href="../Start Here.html">Retour</a>
+		</div>
+
+	</section>
+
+    <script src="./res/js/jquery.min.js"></script>
+    <script src="./res/js/prettify.js"></script>
+    <script src="./res/js/script.js"></script>
+
+    <footer></footer>
+</body>
+</html>

@@ -1,0 +1,6 @@
+[0325/093201.519:ERROR:crash_report_database_win.cc(568)] CreateDirectory C:\Program Files (x86)\Cansuck\: Accès refusé. (0x5)
+[0325/093201.524:ERROR:registration_protocol_win.cc(84)] TransactNamedPipe: Le canal de communication a été fermé. (0x6D)
+[0325/093201.525:ERROR:crash_report_database_win.cc(568)] CreateDirectory C:\Program Files (x86)\Cansuck\: Accès refusé. (0x5)
+[0325/094158.973:ERROR:crash_report_database_win.cc(568)] CreateDirectory C:\Program Files (x86)\Cansuck\: Accès refusé. (0x5)
+[0325/094158.977:ERROR:registration_protocol_win.cc(84)] TransactNamedPipe: Le canal de communication a été fermé. (0x6D)
+[0325/094158.979:ERROR:crash_report_database_win.cc(568)] CreateDirectory C:\Program Files (x86)\Cansuck\: Accès refusé. (0x5)

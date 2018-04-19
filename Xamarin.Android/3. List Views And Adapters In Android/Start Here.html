@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+    <title>ListViews et Adapters en Android</title>
+    <link rel="stylesheet" type="text/css" href="./parts/res/styles/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./parts/res/styles/prettify.css">
+    <link rel="stylesheet" type="text/css" href="./parts/res/styles/styles.css">
+</head>
+
+<body>
+    <!-- This will be filled in at runtime -->
+    <header role="course-title"></header>
+
+   	<section id="main">
+
+
+		<h2>Aperçu</h2>
+		<p>
+			Cette session présente les ListViews et les  Adapters Android. Nous commencerons par les ta^ches élémentaires permettant de remplir une  ListView.
+            Puis nous étudierons quelques patterns pour améliorer l'efficacité et quelques techniquespour aider l'utilisateur à nvaiger dans un grand jeu de données.
+            Nous finirons pas démontrer comment répondre à un clic de l'utilisateur sur un élément de la liste.
+		</p>
+	
+		<h2>Objectifs</h2>
+		<ol>
+			<li>Remplir une ListView en utilisant un ArrayAdapter</li>
+			<li>Gérer les événements de click sur un élément de liste</li>
+			<li>Implémenter un adapter personnalisé</li>
+			<li>Utiliser le layout recycling et le pattern view-holder</li>
+			<li>Activer le fast scrolling et coder une section indexer</li>
+		</ol>
+
+		<h2>Lecture</h2>
+		<p><a href="./parts/slides.pdf">ListViews et Adapters dans Android</a></p>
+
+		<h2>Exercices</h2>
+		<ol>
+
+			<li>
+                <div class="objective">Remplir une ListView en utilisant un ArrayAdapter</div>
+				<a href="./parts/part1.html">Exercice</a>
+				<br />
+				Dans ce premier atelier, vous allez créer un nouveau projet, intégrer les données exemples fournies et utiliser un <code>ArrayAdapter</code> pour
+                afficher les données dans une<code>ListView</code>.
+			</li>
+
+			<li>
+				<div class="objective">Gérer les événements de click sur un élément de liste</div>
+				<a href="./parts/part2.html">Exercice</a>
+				<br />
+				Ici vous allez vous abonner à l'événement <code>ListView.ItemClick</code>. Quand l'utilisateur clique sur un élément de la liste, vous devrez afficher
+                une boite de dialogue alerte qui affiche l'élément sélectionné.
+			</li>
+
+            <li>
+                <div class="objective">Implémenter un adapter personnalisé</div>
+                <a href="./parts/part3.html">Exercice</a>
+                <br />
+                Vous allez implémenter un adapter personnalisé qui construit des lignes personnalisées pour une <code>ListView</code>.
+            </li>
+
+			<li>
+                <div class="objective">Utiliser le layout recycling et le pattern view-holder</div>
+				<a href="./parts/part4.html">Exercise</a>
+				<br />
+				Cette section vous montrera 2 techniques habiteullement utilisées avec une <code>ListView</code> et des adpaters personnalisés
+				pour améliorer l'efficicence <em>layout recycling</em> and <em>view holders</em>.
+			</li>
+
+			<li>
+                <div class="objective">Activer le fast scrolling et coder une section indexer</div>
+				<a href="./parts/part5.html">Exercice</a>
+				<br />
+				Dans cette partie, vous allez activer deux fonctionnalités du <code>ListView</code> pour aider l'utilisateur à naviguer dans un jeu de données
+				important: <em>fast scrolling</em> et <em>section indexer</em>.
+			</li>
+		</ol>
+
+		<h2>Ressources additionnelles</h2>
+        
+
+        <div class="wslist">
+        		<div class="indent-medium"><b>Documentation Xamarin.Android documentation</b></div>
+				<a href="http://developer.android.com/guide/topics/ui/declaring-layout.html#AdapterViews">Building Layouts with an Adapter (Android)</a>
+				<a href="http://developer.xamarin.com/guides/android/user_interface/working_with_listviews_and_adapters/part_1_-_listview_parts_and_functionality/">Part 1 - ListView Parts and Functionality</a>
+				<a href="http://developer.xamarin.com/guides/android/user_interface/working_with_listviews_and_adapters/part_2_-_populating_a_listview_with_data/">Part 2 - Populating a ListView With Data</a>
+				<a href="http://developer.xamarin.com/guides/android/user_interface/working_with_listviews_and_adapters/part_3_-_customizing_a_listview's_appearance/">Part 3 - Customizing a ListView's Appearance</a>
+				<a href="http://developer.xamarin.com/recipes/android/data/adapters/create_a_custom_adapter_for_contacts/">Create a Custom Adapter for Contacts</a>
+				<a href="http://www.vogella.com/tutorials/AndroidListView/article.html">Using lists in Android (ListView) - Tutorial</a>
+
+				<br />
+
+				<div class="indent-medium"><b>Blogs et autres références</b></div>
+				<a href="http://stackoverflow.com/questions/5583608/difference-between-res-and-assets-directories">Difference between /res and /assets directories (StackOverflow)</a>
+				<a href="http://blog.galasoft.ch/posts/2014/05/preview-an-observableadaptert-for-xamarin-android-in-mvvm-light-vnext/">ObservableAdapter sample to simplify UI update after data changes</a>            
+        </div>		
+
+	</section>
+
+    <script src="./parts/res/js/jquery.min.js"></script>
+    <script src="./parts/res/js/prettify.js"></script>
+    <script src="./parts/res/js/script.js"></script>
+
+    <footer></footer>
+</body>
+</html>
+

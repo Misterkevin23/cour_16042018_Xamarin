@@ -1,0 +1,12 @@
+AstonEcole.InstructorAdapter, AstonEcole;md5b05274ce05e4087c755c45e25d028205.InstructorAdapter
+AstonEcole.InstructorAdapter, AstonEcole, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5b05274ce05e4087c755c45e25d028205.InstructorAdapter
+AstonEcole.InstructorAdapter;md5b05274ce05e4087c755c45e25d028205.InstructorAdapter
+astonecole.InstructorAdapter;md5b05274ce05e4087c755c45e25d028205.InstructorAdapter
+AstonEcole.MainActivity, AstonEcole;md5b05274ce05e4087c755c45e25d028205.MainActivity
+AstonEcole.MainActivity, AstonEcole, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5b05274ce05e4087c755c45e25d028205.MainActivity
+AstonEcole.MainActivity;md5b05274ce05e4087c755c45e25d028205.MainActivity
+astonecole.MainActivity;md5b05274ce05e4087c755c45e25d028205.MainActivity
+AstonEcole.ViewHolder, AstonEcole;md5b05274ce05e4087c755c45e25d028205.ViewHolder
+AstonEcole.ViewHolder, AstonEcole, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5b05274ce05e4087c755c45e25d028205.ViewHolder
+AstonEcole.ViewHolder;md5b05274ce05e4087c755c45e25d028205.ViewHolder
+astonecole.ViewHolder;md5b05274ce05e4087c755c45e25d028205.ViewHolder
