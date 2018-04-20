@@ -1,0 +1,6 @@
+Copier les fichiers dans le dossier d'installation de Visual Studio
+C:\Program Files (x86)\Microsoft Visual Studio\Xml\Schemas:
+
+- android-layout-xml.xsd
+- schemas.android.com.apk.res.android.xsd
+

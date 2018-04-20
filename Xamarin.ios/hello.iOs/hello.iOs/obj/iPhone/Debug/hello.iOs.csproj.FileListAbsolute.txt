@@ -1,0 +1,12 @@
+D:\cour_du_20180416_Xamarin_C#\Xamarin.ios\hello.iOs\hello.iOs\bin\iPhone\Debug\hello.iOs.exe
+D:\cour_du_20180416_Xamarin_C#\Xamarin.ios\hello.iOs\hello.iOs\bin\iPhone\Debug\hello.iOs.pdb
+D:\cour_du_20180416_Xamarin_C#\Xamarin.ios\hello.iOs\hello.iOs\obj\iPhone\Debug\ibtool\_BundleResourceWithLogicalName.items
+D:\cour_du_20180416_Xamarin_C#\Xamarin.ios\hello.iOs\hello.iOs\obj\iPhone\Debug\actool\_PartialAppManifest.items
+D:\cour_du_20180416_Xamarin_C#\Xamarin.ios\hello.iOs\hello.iOs\obj\iPhone\Debug\actool\_BundleResourceWithLogicalName.items
+D:\cour_du_20180416_Xamarin_C#\Xamarin.ios\hello.iOs\hello.iOs\obj\iPhone\Debug\coremlc\_PartialAppManifest.items
+D:\cour_du_20180416_Xamarin_C#\Xamarin.ios\hello.iOs\hello.iOs\obj\iPhone\Debug\coremlc\_BundleResourceWithLogicalName.items
+D:\cour_du_20180416_Xamarin_C#\Xamarin.ios\hello.iOs\hello.iOs\obj\iPhone\Debug\optimized\Entitlements.plist
+D:\cour_du_20180416_Xamarin_C#\Xamarin.ios\hello.iOs\hello.iOs\obj\iPhone\Debug\optimized\
+D:\cour_du_20180416_Xamarin_C#\Xamarin.ios\hello.iOs\hello.iOs\obj\iPhone\Debug\hello.iOs.csproj.CoreCompileInputs.cache
+D:\cour_du_20180416_Xamarin_C#\Xamarin.ios\hello.iOs\hello.iOs\obj\iPhone\Debug\hello.iOs.exe
+D:\cour_du_20180416_Xamarin_C#\Xamarin.ios\hello.iOs\hello.iOs\obj\iPhone\Debug\hello.iOs.pdb
